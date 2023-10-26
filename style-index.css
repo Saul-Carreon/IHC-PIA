@@ -1,27 +1,30 @@
-.footer{
+.footer {
     background-color: #04f581;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     padding: 20px;
 }
 .contenido{
-    
+    margin-top: -60px;
+    padding: 70px;
 }
-.back-img{
+
+.back-img {
     display: flex;
-     flex-direction: row;
-     justify-content: center;
-     align-items: center;
-    background-color:#04f581;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #04f581;
     border-radius: 25px;
-    padding: 20px;
+    height: 500px;
     margin-bottom: 10px;
 }
-.size-img{
+
+.size-img {
     width: 250px;
     padding: 20px;
     background-color: #04f581;
     border-radius: 20rem;
     box-shadow: 5px 5px 5px black;
-     margin-right: 10px;
+    margin-right: 10px;
 }
