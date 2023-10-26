@@ -28,4 +28,9 @@
     border-radius: 20rem;
     box-shadow: 5px 5px 5px black;
     margin-right: 10px;
+    transition: transform 0.2s;
+}
+
+.size-img:hover{
+    transform: scale(1.1);
 }
