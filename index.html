@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <!--header-->
+    <!--header--> 
     <nav class="navbar navbar-expand-md " style="background-color:#04f581;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"
@@ -30,7 +30,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto ">
                     <li class="nav-item">
                         <a class="nav-link disabled" style="color:whitesmoke" href="#">Inicio</a>
                     </li>
@@ -39,13 +39,16 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Categorias
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Numeros</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <ul class="dropdown-menu" style="background-color:#04f581;">
+                            <li><a class="dropdown-item" href="Numeros.html">Numeros</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Animales</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Lugares</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -56,14 +59,28 @@
         </div>
     </nav>
     <!--contenido-->
-    <div class="contenido">
-        <center>
-            <h2 class="titulo-index">JUEGA Y APRENDE</h2>
-        </center>
-        <div class="back-img">
-            <img src="memorama-de-numeros - copia.jpg" class="size-img">
-            <img src="memorama-de-numeros - copia.jpg" class="size-img">
+    <div class="contenido row">
+        
+            <h2 class="titulo-index text-center">JUEGA Y APRENDE</h2>
+        
+        <div class="back-img row ">
+            <div class="col d-flex justify-content-center">
+                <div>
+                    <h1 class="text-center">NÚMEROS</h1>
+                    <a href="index/Numeros-ingles.html"><img src="img/memorama-de-numeros - copia.jpg" class="size-img"> </a>
+                </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <div>
+                    <h1 class="text-center">PAÍSES</h1>
+                    <a href=""><img src="https://play-lh.googleusercontent.com/5fVBralidSPuvuj-7GmjY3r701Rr73xANYltrLvIWvlFXB1l0btaHu6cPot0yDRSTw=w526-h296-rw" class="size-img"> </a>
+                </div>
+            
+            </div>
+            
         </div>
+
+
     </div>
     <!--footer-->
     <div class="footer">
