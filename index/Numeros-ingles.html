@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorama</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/css.css">
+</head>
+
+<body>
+    <div id="tablero">
+    </div>
+
+    <br>
+
+    <div class="nuevo-juego" onclick="generarTablero()">
+        Nuevo Juego
+    </div>
+
+    <!-- JS -->
+    <!-- parte lógica -->
+    <script>
+
+        let iconos = []
+        let selecciones = []
+
+        generarTablero()
+
+        function cargarIconos() {
+            iconos = [
+                '<img src="https://previews.123rf.com/images/ylivdesign/ylivdesign1702/ylivdesign170205021/71518512-cepillo-de-dientes-con-el-icono-de-pasta-de-dientes-ilustración-de-dibujos-animados-de-cepillo-de.jpg" alt="Descripción de la imagen">',
+                '<img src="https://previews.123rf.com/images/pogorelovaolga/pogorelovaolga1702/pogorelovaolga170200141/70875890-pasta-de-dientes-iconos-en-estilo-de-dibujos-animados-ilustración-vectorial-plana-aislado-en-un.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/736x/0c/ec/e5/0cece586c954083d42b0b97080d0dfc4.jpg" alt="Descripción de la imagen">',
+                '<img src="https://previews.123rf.com/images/tigatelu/tigatelu1704/tigatelu170400032/76913996-ilustración-vectorial-de-carácter-de-dientes-enfermos-con-caries.jpg" alt="Descripción de la imagen">',
+                '<img src="https://png.pngtree.com/png-vector/20210823/ourlarge/pngtree-cartoon-teeth-wearing-braces-png-image_3823138.jpg" alt="Descripción de la imagen">',
+                '<img src="data:image/png;base64,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" alt="Descripción de la imagen">',
+                '<img src="https://previews.123rf.com/images/jemastock/jemastock1705/jemastock170504972/77829660-color-de-la-imagen-de-hilo-dental-de-dibujos-animados-para-la-ilustración-de-vector-de-salud-oral.jpg" alt="Descripción de la imagen">',
+                '<img src="data:image/png;base64,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" alt="Descripción de la imagen">',
+                '<img src="https://previews.123rf.com/images/yeletkeshet/yeletkeshet1506/yeletkeshet150600005/41296631-dibujos-animados-de-gérmenes-destruyendo-un-diente.jpg" alt="Descripción de la imagen">',
+                '<img src="https://previews.123rf.com/images/pandavector/pandavector1707/pandavector170705569/82723546-radiografía-del-diente-en-la-mano-del-dentista-estomatología-icono-único-en-estilo-de-dibujos.jpg" alt="Descripción de la imagen">',
+                '<img src="https://previews.123rf.com/images/yupiramos/yupiramos1608/yupiramos160804758/60683074-niño-feliz-de-dibujos-animados-con-un-cepillo-de-dientes-y-un-diente-grande-de-dibujos-animados.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/564x/8f/24/89/8f2489efeebe9b911582926c03535b97.jpg" alt="Descripción de la imagen">',
+            ]
+        }
+
+        function generarTablero() {
+            cargarIconos()
+            selecciones = []
+            let tablero = document.getElementById("tablero")
+            let tarjetas = []
+            for (let i = 0; i < 24; i++) {
+                tarjetas.push(`
+                <div class="area-tarjeta" onclick="seleccionarTarjeta(${i})">
+                    <div class="tarjeta" id="tarjeta${i}">
+                        <div class="cara trasera" id="trasera${i}">
+                            ${iconos[0]}
+                        </div>
+                        <div class="cara superior">
+                            <i class="far fa-question-circle"></i>
+                        </div>
+                    </div>
+                </div>        
+                `)
+                if (i % 2 == 1) {
+                    iconos.splice(0, 1)
+                }
+            }
+            tarjetas.sort(() => Math.random() - 0.5)
+            tablero.innerHTML = tarjetas.join(" ")
+        }
+
+        function seleccionarTarjeta(i) {
+            let tarjeta = document.getElementById("tarjeta" + i)
+            if (tarjeta.style.transform != "rotateY(180deg)") {
+                tarjeta.style.transform = "rotateY(180deg)"
+                selecciones.push(i)
+            }
+            if (selecciones.length == 2) {
+                deseleccionar(selecciones)
+                selecciones = []
+            }
+        }
+
+        function deseleccionar(selecciones) {
+            setTimeout(() => {
+                let trasera1 = document.getElementById("trasera" + selecciones[0])
+                let trasera2 = document.getElementById("trasera" + selecciones[1])
+                if (trasera1.innerHTML != trasera2.innerHTML) {
+                    let tarjeta1 = document.getElementById("tarjeta" + selecciones[0])
+                    let tarjeta2 = document.getElementById("tarjeta" + selecciones[1])
+                    tarjeta1.style.transform = "rotateY(0deg)"
+                    tarjeta2.style.transform = "rotateY(0deg)"
+                }else{
+                    trasera1.style.background = "plum"
+                    trasera2.style.background = "plum"
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
