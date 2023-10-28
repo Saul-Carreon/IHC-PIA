@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorama</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/css.css">
+</head>
+
+<body>
+    <div id="tablero">
+    </div>
+
+    <br>
+
+    <div class="nuevo-juego" onclick="generarTablero()">
+        Nuevo Juego
+    </div>
+<br>
+    <div class="nuevo-juego" onclick="history.go(-1)">
+        Regresar
+    </div>
+
+    <!-- JS -->
+    <!-- parte lógica -->
+    <script>
+
+        let iconos = []
+        let selecciones = []
+
+        generarTablero()
+
+        function cargarIconos() {
+            iconos = [
+                '<img src="https://i.pinimg.com/564x/44/88/ba/4488ba1160c7b88cf06518b8808a467b.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/2b/fc/7f/2bfc7f1f118e77a465614ee72359be8d.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/05/a5/ac/05a5acf111850b0b31a4ed49b2f32fc5.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/21/84/c4/2184c49ee0c9f54d9ebf94c58e50298a.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/76/bd/c9/76bdc9d03b92220a73bfab6b5423f1cf.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/ba/7e/c0/ba7ec0a6ac524335bc07d58a39b92d0b.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/df/19/fc/df19fcf1d498e6a348c543b031e2449f.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/d3/1f/f1/d31ff127a05b0fad66047979c85e0841.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/ea/5a/f4/ea5af4ce5e561d21f0b9dc5928ff5ae4.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/13/32/68/13326882e8ee94bdb57e6485adf4a7c6.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/b2/4d/83/b24d83dbc6cef4260c41e67195ebfc73.jpg" alt="Descripción de la imagen">',
+                '<img src="https://i.pinimg.com/236x/28/f1/20/28f120b629069334b325aa4345a3c673.jpg" alt="Descripción de la imagen">'
+            ]
+        }
+
+        function generarTablero() {
+            cargarIconos()
+            selecciones = []
+            let tablero = document.getElementById("tablero")
+            let tarjetas = []
+            for (let i = 0; i < 24; i++) {
+                tarjetas.push(`
+                <div class="area-tarjeta" onclick="seleccionarTarjeta(${i})">
+                    <div class="tarjeta" id="tarjeta${i}">
+                        <div class="cara trasera" id="trasera${i}">
+                            ${iconos[0]}
+                        </div>
+                        <div class="cara superior">
+                            <i class="far fa-question-circle"></i>
+                        </div>
+                    </div>
+                </div>        
+                `)
+                if (i % 2 == 1) {
+                    iconos.splice(0, 1)
+                }
+            }
+            tarjetas.sort(() => Math.random() - 0.5)
+            tablero.innerHTML = tarjetas.join(" ")
+        }
+
+        function seleccionarTarjeta(i) {
+            let tarjeta = document.getElementById("tarjeta" + i)
+            if (tarjeta.style.transform != "rotateY(180deg)") {
+                tarjeta.style.transform = "rotateY(180deg)"
+                selecciones.push(i)
+            }
+            if (selecciones.length == 2) {
+                deseleccionar(selecciones)
+                selecciones = []
+            }
+        }
+
+        function deseleccionar(selecciones) {
+            setTimeout(() => {
+                let trasera1 = document.getElementById("trasera" + selecciones[0])
+                let trasera2 = document.getElementById("trasera" + selecciones[1])
+                if (trasera1.innerHTML != trasera2.innerHTML) {
+                    let tarjeta1 = document.getElementById("tarjeta" + selecciones[0])
+                    let tarjeta2 = document.getElementById("tarjeta" + selecciones[1])
+                    tarjeta1.style.transform = "rotateY(0deg)"
+                    tarjeta2.style.transform = "rotateY(0deg)"
+                }else{
+                    trasera1.style.background = "plum"
+                    trasera2.style.background = "plum"
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

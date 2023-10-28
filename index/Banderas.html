@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorama</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/css.css">
+</head>
+
+<body>
+    <div id="tablero">
+    </div>
+
+    <br>
+
+    <div class="nuevo-juego" onclick="generarTablero()">
+        Nuevo Juego
+    </div>
+<br>
+    <div class="nuevo-juego" onclick="history.go(-1)">
+        Regresar
+    </div>
+
+    <!-- JS -->
+    <!-- parte lógica -->
+    <script>
+
+        let iconos = []
+        let selecciones = []
+
+        generarTablero()
+
+        function cargarIconos() {
+            iconos = [
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4371.jpg?w=740" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4214.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4499.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4222.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4227.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4436.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4393.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4351.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4496.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4531.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4224.jpg" alt="Descripción de la imagen">',
+                '<img src="https://img.freepik.com/vector-premium/ondeando-bandera-asta-bandera_97886-4219.jpg" alt="Descripción de la imagen">'
+            ]
+        }
+
+        function generarTablero() {
+            cargarIconos()
+            selecciones = []
+            let tablero = document.getElementById("tablero")
+            let tarjetas = []
+            for (let i = 0; i < 24; i++) {
+                tarjetas.push(`
+                <div class="area-tarjeta" onclick="seleccionarTarjeta(${i})">
+                    <div class="tarjeta" id="tarjeta${i}">
+                        <div class="cara trasera" id="trasera${i}">
+                            ${iconos[0]}
+                        </div>
+                        <div class="cara superior">
+                            <i class="far fa-question-circle"></i>
+                        </div>
+                    </div>
+                </div>        
+                `)
+                if (i % 2 == 1) {
+                    iconos.splice(0, 1)
+                }
+            }
+            tarjetas.sort(() => Math.random() - 0.5)
+            tablero.innerHTML = tarjetas.join(" ")
+        }
+
+        function seleccionarTarjeta(i) {
+            let tarjeta = document.getElementById("tarjeta" + i)
+            if (tarjeta.style.transform != "rotateY(180deg)") {
+                tarjeta.style.transform = "rotateY(180deg)"
+                selecciones.push(i)
+            }
+            if (selecciones.length == 2) {
+                deseleccionar(selecciones)
+                selecciones = []
+            }
+        }
+
+        function deseleccionar(selecciones) {
+            setTimeout(() => {
+                let trasera1 = document.getElementById("trasera" + selecciones[0])
+                let trasera2 = document.getElementById("trasera" + selecciones[1])
+                if (trasera1.innerHTML != trasera2.innerHTML) {
+                    let tarjeta1 = document.getElementById("tarjeta" + selecciones[0])
+                    let tarjeta2 = document.getElementById("tarjeta" + selecciones[1])
+                    tarjeta1.style.transform = "rotateY(0deg)"
+                    tarjeta2.style.transform = "rotateY(0deg)"
+                }else{
+                    trasera1.style.background = "plum"
+                    trasera2.style.background = "plum"
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
